@@ -1,60 +1,73 @@
-import React, { useState, Component } from "react";
-// import Nav from "./components/Nav";
-// import ContactForm from "./components/ContactForm";
-import Ninjas from "./components/Ninjas";
-import AddNinja from "./components/AddNinja";
+import React, { Component } from "react";
+import ToDos from "./components/ToDos";
+import AddToDo from "./components/AddToDo";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import NavBar from "./components/NavBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Post from "./components/Post";
 
-// function App() {
-//   const [age, setAge] = useState(28);
-//   const [name, setName] = useState(["Ryu", "Gohan", "Steve"]);
-//   const [belt, setBelt] = useState("Black");
+// export class App extends Component {
+//   state = {
+//     todos: [
+//       { id: 1, content: "Buy Milk", priority: "High" },
+//       { id: 2, content: "Cut the Grass", priority: "Low" },
+//       { id: 3, content: "Drop off Mail", priority: "Moderate" },
+//       { id: 4, content: "Get a haircut", priority: "High" }
+//     ]
+//   };
 
-//   return (
-//     <div className="App">
-//       <h1>My React App</h1>
-//       <p>Welcome!</p>
-//       <Ninjas name={name} age={age} belt={belt} />
-//     </div>
-//   );
+//   deleteToDo = id => {
+//     const todos = this.state.todos.filter(todo => {
+//       return todo.id !== id;
+//     });
+//     this.setState({
+//       todos: todos
+//     });
+//   };
+
+//   addToDo = todo => {
+//     todo.id = Math.random();
+//     const todos = [...this.state.todos, todo];
+//     this.setState({
+//       todos: todos
+//     });
+//   };
+
+//   render() {
+//     return (
+//       <BrowserRouter>
+//         <div>
+//           <NavBar />
+//           <Route path="/home" component={Home} />
+//           <h1>My To Do List</h1>
+//           <ToDos todos={this.state.todos} deleteToDo={this.deleteToDo} />
+//           <AddToDo addToDo={this.addToDo} />
+//         </div>
+//       </BrowserRouter>
+//     );
+//   }
 // }
 
-class App extends Component {
-  state = {
-    ninjas: [
-      { name: "Ryu", age: 28, belt: "black", id: 1 },
-      { name: "Gohan", age: 25, belt: "blue", id: 2 },
-      { name: "Goku", age: 30, belt: "brown", id: 3 }
-    ]
-  };
+// export default App;
 
-  deleteNinja = id => {
-    const newNinjas = this.state.ninjas.filter(ninja => {
-      return ninja.id !== id;
-    });
+//React Router
 
-    this.setState({
-      ninjas: newNinjas
-    });
-  };
-
-  addNinja = ninja => {
-    ninja.id = Math.random();
-    let ninjas = [...this.state.ninjas, ninja];
-    this.setState({
-      ninjas: ninjas
-    });
-  };
-
+export default class App extends Component {
   render() {
     return (
-      <div>
-        <h1>My React App</h1>
-        <p>Welcome!</p>
-        <Ninjas ninjas={this.state.ninjas} deleteNinja={this.deleteNinja} />
-        <AddNinja addNinja={this.addNinja} />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/:post_id" component={Post} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
-
-export default App;
